@@ -4,15 +4,15 @@
 It's a fast and easy way to develop Xcode projects with the power of Vim. 
 
 ## Features
-- Build targets with a single keystoke 
+- Build targets with a single keystroke 
 - Step through and quick fix build errors 
 - List your targets, schemes, and build configurations 
 - Map custom build commands 
-- Genrate xcodebuild commands 
+- Generate xcodebuild commands 
 - Automatically logs build results 
 - Xcode need not be open! 
 
-###Supports the Xcode commands your already used to like Build, Test, and Clean
+###Supports the Xcode commands you're already used to like Build, Test, and Clean
 
 Install with Pathogen:
 
