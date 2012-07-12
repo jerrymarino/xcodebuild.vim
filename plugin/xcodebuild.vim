@@ -191,34 +191,34 @@ fun s:findProjectFileName()
 endf
 
 fun g:XCB_RunBuildCommand(cmd)
-    " Thanks to jason @ http://vios.eraserhead.net/blog/2011/09/25/driving-kiwi-with-vim/
-    let l:BuildLog = "build/vim.log"
-    let l:bf bufname("%") != ""
-        silent write
-    endif
-    echo "Building.."
-    let l:StartTime = reltime()
-    exec "silent !" . a:cmd . " >" . l:BuildLog . " 2>&1"
+	" Thanks to jason @ http://vios.eraserhead.net/blog/2011/09/25/driving-kiwi-with-vim/
+	let l:BuildLog = "build/vim.log"
+	if l:bf bufname("%") != ""
+		silent write
+	endif
+	echo "Building.."
+	let l:StartTime = reltime()
+	exec "silent !" . a:cmd . " >" . l:BuildLog . " 2>&1"
 
-    " xcodebuild does NOT set exit code properly, so check the build log
-    exec "silent !grep -q '^\*\* BUILD FAILED' " . l:BuildLog
-    redraw!
-    if !v:shell_error
-        set errorformat=
-          \%f:%l:%c:{%*[^}]}:\ error:\ %m,
-          \%f:%l:%c:{%*[^}]}:\ fatal\ error:\ %m,
-          \%f:%l:%c:{%*[^}]}:\ warning:\ %m,
-          \%f:%l:%c:\ error:\ %m,
-          \%f:%l:%c:\ fatal\ error:\ %m,
-          \%f:%l:%c:\ warning:\ %m,
-          \%f:%l:\ Error:\ %m,
-          \%f:%l:\ error:\ %m,
-          \%f:%l:\ fatal\ error:\ %m,
-          \%f:%l:\ warning:\ %m
-        execute "cfile! " . l:BuildLog
-    else
-        echo "Building.. OK - " . reltimestr(reltime(l:StartTime)) . " seconds"
-    endif
+	" xcodebuild does NOT set exit code properly, so check the build log
+	exec "silent !grep -q '^\*\* BUILD FAILED' " . l:BuildLog
+	redraw!
+	if !v:shell_error
+		set errorformat=
+			\%f:%l:%c:{%*[^}]}:\ error:\ %m,
+			\%f:%l:%c:{%*[^}]}:\ fatal\ error:\ %m,
+			\%f:%l:%c:{%*[^}]}:\ warning:\ %m,
+			\%f:%l:%c:\ error:\ %m,
+			\%f:%l:%c:\ fatal\ error:\ %m,
+			\%f:%l:%c:\ warning:\ %m,
+			\%f:%l:\ Error:\ %m,
+			\%f:%l:\ error:\ %m,
+			\%f:%l:\ fatal\ error:\ %m,
+			\%f:%l:\ warning:\ %m
+		execute "cfile! " . l:BuildLog
+	else
+		echo "Building.. OK - " . reltimestr(reltime(l:StartTime)) . " seconds"
+	endif
 endf
 
 
