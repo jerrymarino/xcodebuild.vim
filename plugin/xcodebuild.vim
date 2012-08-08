@@ -54,7 +54,6 @@ endf
 fun s:defaultInit()
 	let s:sdk = "iphonesimulator"
 	let s:buildConfiguration = "Debug"
-	let s:scheme = s:projectName
 	let s:testTarget = s:projectName . "Tests"
 	let s:target = s:projectName
 endf
@@ -114,10 +113,16 @@ endf
 
 fun s:buildCommandWithTarget(target)
 	let cmd = "xcodebuild "
-		\ . " -sdk " . s:sdk
-		\ . " -configuration " 	. s:buildConfiguration
-		\ . " -target " . a:target
-		\ . " -scheme " . s:scheme
+                \ . " -target " . a:target
+        if(!empty(s:sdk))
+                let cmd .= " -sdk " . s:sdk
+        endif
+        if(!empty(s:buildConfiguration))
+                let cmd .= " -configuration " . s:buildConfiguration
+        endif
+        if(!empty(s:scheme))
+                let cmd .= " -scheme " . s:scheme
+        endif
 	return cmd
 endf
 
