@@ -54,8 +54,8 @@ endf
 fun s:defaultInit()
 	let s:sdk = "iphonesimulator"
 	let s:buildConfiguration = "Debug"
-	let s:testTarget = s:projectName . "Tests"
-	let s:target = s:projectName
+	let s:testTarget = "'". substitute(s:projectName, "\.\/", "", "") ."'" . "Tests"
+  let s:target = "'". substitute(s:projectName, "\.\/", "", "") ."'"
 endf
  
 fun g:XCB_SetTarget(target)
@@ -65,7 +65,7 @@ fun g:XCB_SetTarget(target)
 		return
 	endif
 	let s:target = a:target
-	echo a:target 
+	echo a:target
 endf
 
 fun s:targetIsValid(target)
@@ -192,7 +192,7 @@ endf
 
 fun s:findProjectFileName()
 	let s:projectFile = globpath(expand('.'), '*.xcodeproj')
-	return matchstr(s:projectFile, '\w\+\ze.xcodeproj')
+	return matchstr(s:projectFile, '.*\ze.xcodeproj')
 endf
 
 fun g:XCB_RunBuildCommand(cmd)
